@@ -15,4 +15,3 @@ spec:
   values:
     crds:
       enabled: true
-      installCRDs: true
