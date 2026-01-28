@@ -4,6 +4,5 @@ resources:
   - crds/cert-manager-crds.yaml
   - namespace.yaml
   - helm-repo.yaml
-  # - helm-release.yaml
-  # - crds/cert-manager-crds.yaml
+  - helm-release.yaml
   # - cluster-issuer.yaml
