@@ -4,17 +4,14 @@ metadata:
   name: vaultwarden-db
   namespace: vaultwarden
 spec:
-  instances: 3
-  primaryUpdateStrategy: unsupervised
+  instances: 1
   storage:
-    size: 16Gi
-  superuserSecret:
-    name: vaultwarden-db-superuser
+    size: 8Gi
   bootstrap:
     initdb:
       database: vaultwarden
       owner: vaultwarden
       secret:
-        name: vaultwarden-db-app
+        name: vaultwarden-db
   monitoring:
     enablePodMonitor: true
