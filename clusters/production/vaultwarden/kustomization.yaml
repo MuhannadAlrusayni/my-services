@@ -3,7 +3,7 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - cnpg-cluster.yaml
-  # - deployment.yaml
-  # - service.yaml
-  # - pvc.yaml
-  # - configmap.yaml
+  - configmap.yaml
+  - pvc.yaml
+  - deployment.yaml
+  - service.yaml
