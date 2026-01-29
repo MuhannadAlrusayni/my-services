@@ -4,6 +4,7 @@ resources:
   - namespace.yaml
   - cnpg-cluster.yaml
   - configmap.yaml
+  - secret-sealed.yaml
   - pvc.yaml
   - deployment.yaml
   - service.yaml
