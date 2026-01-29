@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vaultwarden-config
+  namespace: vaultwarden
+  labels:
+    app: vaultwarden
+data:
+  ROCKET_PORT: "80"
+  # DOMAIN: "https://vaultwarden.example.com"
+  # SIGNUPS_ALLOWED: "true"
+  # WEBSOCKET_ENABLED: "true"
