@@ -28,6 +28,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: vaultwarden-config
+            - secretRef:
+                name: vaultwarden-secret
           env:
             - name: DATABASE_URL
               valueFrom:
