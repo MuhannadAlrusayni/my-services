@@ -3,4 +3,4 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - cloudflared-token-secret-sealed.yaml
-  - deployment.yaml
+  # - deployment.yaml
