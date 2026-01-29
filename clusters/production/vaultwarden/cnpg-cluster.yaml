@@ -11,7 +11,5 @@ spec:
     initdb:
       database: vaultwarden
       owner: vaultwarden
-      secret:
-        name: vaultwarden-db
   monitoring:
     enablePodMonitor: true
