@@ -38,3 +38,8 @@ spec:
         - name: certs
           secret:
             secretName: rustfs-tls
+            items:
+              - key: tls.crt
+                path: rustfs_cert.pem
+              - key: tls.key
+                path: rustfs_key.pem
