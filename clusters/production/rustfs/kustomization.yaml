@@ -7,4 +7,4 @@ resources:
   - secret-sealed.yaml
   - pvc.yaml
   # - deployment.yaml
-  # - service.yaml
+  - service.yaml
