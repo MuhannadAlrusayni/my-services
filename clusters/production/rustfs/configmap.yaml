@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: rustfs-config
+  name: rustfs-configmap
   namespace: rustfs
 data:
   RUSTFS_CONSOLE_ENABLE: "true"
