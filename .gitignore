@@ -1,1 +1,3 @@
 clusters/production/cloudflared-tunnel/cloudflared-token-secret.yaml
+clusters/production/vaultwarden/secret.yaml
+clusters/production/rustfs/secret.yaml

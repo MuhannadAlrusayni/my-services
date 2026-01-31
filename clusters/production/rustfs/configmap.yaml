@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rustfs-config
+  namespace: rustfs
+data:
+  RUSTFS_CONSOLE_ENABLE: "true"
+  RUSTFS_SERVER_DOMAINS: "s3.malrusayni.com"

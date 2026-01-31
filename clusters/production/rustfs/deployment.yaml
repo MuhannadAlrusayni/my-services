@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rustfs-deployment
+  namespace: rustfs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rustfs
+  template:
+    metadata:
+      labels:
+        app: rustfs
+    spec:
+      containers:
+        - name: rustfs
+          image: rustfs/rustfs:latest
+          args: ["/data"]
+          ports:
+            - containerPort: 9000
+            - containerPort: 9001
+          envFrom:
+            - configMapRef:
+                name: rustfs-configmap
+            - secretRef:
+                name: rustfs-secret
+          volumeMounts:
+            - name: data
+              mountPath: /data
+            - name: certs
+              mountPath: /certs
+              readOnly: true
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: rustfs-pvc
+        - name: certs
+          secret:
+            secretName: rustfs-tls
