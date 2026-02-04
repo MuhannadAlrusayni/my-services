@@ -18,7 +18,7 @@ spec:
                 name: rustfs-service
                 port:
                   number: 9000
-    - host: "s3-admin.malrusayni.com"
+    - host: "s3admin.malrusayni.com"
       http:
         paths:
           - path: /
@@ -31,5 +31,5 @@ spec:
   tls:
     - hosts:
         - "s3.malrusayni.com"
-        - "s3-admin.malrusayni.com"
+        - "s3admin.malrusayni.com"
       secretName: rustfs-tls
