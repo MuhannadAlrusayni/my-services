@@ -14,4 +14,4 @@ resources:
 configMapGenerator:
   - name: frigate-config-file
     files:
-      - frigate-config.yml
+      - frigate-config.yaml
