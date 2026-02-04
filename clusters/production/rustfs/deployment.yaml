@@ -22,7 +22,7 @@ spec:
             - containerPort: 9001
           envFrom:
             - configMapRef:
-                name: rustfs-config
+                name: rustfs-configmap
             - secretRef:
                 name: rustfs-secret
           volumeMounts:
