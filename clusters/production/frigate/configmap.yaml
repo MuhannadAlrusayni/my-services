@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frigate-env
+  namespace: frigate
+data:
+  LIBVA_DRIVER_NAME: "radeonsi"
+  FFmpeg_HWACCEL: "vaapi"

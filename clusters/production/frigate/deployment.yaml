@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frigate
+  namespace: frigate
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frigate
+  template:
+    metadata:
+      labels:
+        app: frigate
+    spec:
+      nodeSelector:
+        device-dri: "true"
+        device-kfd: "true"
+      containers:
+        - name: frigate
+          image: ghcr.io/blakeblackshear/frigate:stable-rocm
+          envFrom:
+            - configMapRef:
+                name: frigate-env
+            - secretRef:
+                name: frigate-secret
+          ports:
+            - containerPort: 1984
+            - containerPort: 8971
+            - containerPort: 5000
+          resources:
+            requests:
+              memory: "4Gi"
+            limits:
+              memory: "8Gi"
+          volumeMounts:
+            - name: localtime
+              mountPath: /etc/localtime
+              readOnly: true
+            - name: config # <-- this should be mounted before config-file
+              mountPath: /config
+            - name: config-file
+              mountPath: /config/config.yml
+              subPath: frigate-config.yml
+            - name: storage
+              mountPath: /media/frigate
+            - name: cache
+              mountPath: /tmp/cache
+            - name: dri
+              mountPath: /dev/dri
+            - name: kfd
+              mountPath: /dev/kfd
+          securityContext:
+            privileged: true
+      volumes:
+        - name: localtime
+          hostPath:
+            path: /etc/localtime
+            type: File
+        - name: config
+          persistentVolumeClaim:
+            claimName: frigate-config
+        - name: storage # <-- this should be defined before config-file ?
+          persistentVolumeClaim:
+            claimName: frigate-storage
+        - name: config-file
+          configMap:
+            name: frigate-config-file
+        - name: cache
+          emptyDir:
+            medium: Memory
+            sizeLimit: 1Gi
+        - name: dri
+          hostPath:
+            path: /dev/dri
+            type: Directory
+        - name: kfd
+          hostPath:
+            path: /dev/kfd
+            type: CharDevice

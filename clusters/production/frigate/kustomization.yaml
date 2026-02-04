@@ -1,0 +1,17 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: frigate
+resources:
+  - namespace.yaml
+  - configmap.yaml
+  - secret-sealed.yaml
+  - config-pvc.yaml
+  - storage-pvc.yaml
+  - deployment.yaml
+  - service.yaml
+  - ingress.yaml
+
+configMapGenerator:
+  - name: frigate-config-file
+    files:
+      - frigate-config.yml

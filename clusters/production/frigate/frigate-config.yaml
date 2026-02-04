@@ -1,0 +1,70 @@
+mqtt:
+  enabled: false
+
+#detectors:
+# rocm:
+#   type: rocm
+
+#model:
+# model_type: yolonas
+# width: 416
+# height: 416
+# input_pixel_format: bgr
+# path: /config/yolov4.onnx
+# labelmap_path: /labelmap/coco-80.txt
+
+record:
+  enabled: true
+  retain:
+    days: 15 # Store recordings for 30 days
+    mode: motion # 'motion' only saves clips with motion; use 'all' for continuous recording
+  alerts:
+    retain:
+      days: 35
+  detections:
+    retain:
+      days: 35
+
+ffmpeg:
+  output_args:
+    record: preset-record-generic-audio-aac
+
+audio:
+  enabled: True
+
+snapshots:
+  enabled: true
+  retain:
+    default: 30
+
+go2rtc:
+  streams:
+    outdoor_cam_main:
+      - rtsp://admin:4557C@m4557@192.168.100.173:554/cam/realmonitor?channel=1&subtype=0
+      - "ffmpeg:rtsp_cam#audio=opus"
+    outdoor_cam_sub:
+      - rtsp://admin:4557C@m4557@192.168.100.173:554/cam/realmonitor?channel=1&subtype=1
+      - "ffmpeg:rtsp_cam#audio=opus"
+
+cameras:
+  outdoor_camera:
+    enabled: true
+    audio:
+      enabled: True
+    ffmpeg:
+      inputs:
+        - path: rtsp://127.0.0.1:8554/outdoor_cam_main
+          roles:
+            - record # High-resolution stream for recording
+        - path: rtsp://127.0.0.1:8554/outdoor_cam_sub
+          roles:
+            - detect # Low-resolution stream for faster motion detection
+            - audio
+    live:
+      stream_name: outdoor_cam_sub
+    detect:
+      width: 704 # Set this to your camera's resolution
+      height: 480
+      fps: 5 # Adjust based on your camera capabilities
+
+version: 0.15-1
