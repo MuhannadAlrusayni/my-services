@@ -39,9 +39,9 @@ spec:
               readOnly: true
             - name: config # <-- this should be mounted before config-file
               mountPath: /config
-            - name: config-file
-              mountPath: /config/config.yaml
-              subPath: frigate-config.yaml
+            # - name: config-file
+            #   mountPath: /config/config.yaml
+            #   subPath: frigate-config.yaml
             - name: storage
               mountPath: /media/frigate
             - name: cache
@@ -63,9 +63,9 @@ spec:
         - name: storage # <-- this should be defined before config-file ?
           persistentVolumeClaim:
             claimName: frigate-storage
-        - name: config-file
-          configMap:
-            name: frigate-config-file
+        # - name: config-file
+        #   configMap:
+        #     name: frigate-config-file
         - name: cache
           emptyDir:
             medium: Memory

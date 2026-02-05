@@ -11,7 +11,7 @@ resources:
   - service.yaml
   - ingress.yaml
 
-configMapGenerator:
-  - name: frigate-config-file
-    files:
-      - frigate-config.yaml
+# configMapGenerator:
+#   - name: frigate-config-file
+#     files:
+#       - frigate-config.yaml
