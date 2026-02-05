@@ -5,11 +5,11 @@ resources:
   - namespace.yaml
   - configmap.yaml
   - secret-sealed.yaml
-  # - config-pvc.yaml
-  # - storage-pvc.yaml
-  # - deployment.yaml
-  # - service.yaml
-  # - ingress.yaml
+  - config-pvc.yaml
+  - storage-pvc.yaml
+  - deployment.yaml
+  - service.yaml
+  - ingress.yaml
 
 # configMapGenerator:
 #   - name: frigate-config-file
