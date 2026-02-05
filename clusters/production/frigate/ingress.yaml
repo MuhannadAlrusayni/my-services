@@ -8,7 +8,7 @@ metadata:
     kubernetes.io/ingress.class: "traefik"
 spec:
   rules:
-    - host: "s3.malrusayni.com"
+    - host: "frigate.malrusayni.com"
       http:
         paths:
           - path: /

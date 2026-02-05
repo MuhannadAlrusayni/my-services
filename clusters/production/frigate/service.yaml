@@ -7,13 +7,13 @@ spec:
   selector:
     app: frigate
   ports:
-    - name: http
+    - name: web-with-auth
       port: 1984
       targetPort: 1984
     - name: rtsp
       port: 8971
       targetPort: 8971
-    - name: web
+    - name: web-no-auth
       port: 5000
       targetPort: 5000
   type: ClusterIP
