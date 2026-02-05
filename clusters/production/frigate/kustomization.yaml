@@ -5,9 +5,9 @@ resources:
   - namespace.yaml
   - configmap.yaml
   - secret-sealed.yaml
-  - config-pvc.yaml
-  - storage-pvc.yaml
-  - deployment.yaml
+  # - config-pvc.yaml
+  # - storage-pvc.yaml
+  # - deployment.yaml
   - service.yaml
   - ingress.yaml
 
