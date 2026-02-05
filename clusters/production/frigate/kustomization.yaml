@@ -8,8 +8,8 @@ resources:
   # - config-pvc.yaml
   # - storage-pvc.yaml
   # - deployment.yaml
-  - service.yaml
-  - ingress.yaml
+  # - service.yaml
+  # - ingress.yaml
 
 configMapGenerator:
   - name: frigate-config-file
