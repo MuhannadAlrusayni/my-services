@@ -40,8 +40,8 @@ spec:
             - name: config # <-- this should be mounted before config-file
               mountPath: /config
             - name: config-file
-              mountPath: /config/config.yml
-              subPath: frigate-config.yml
+              mountPath: /config/config.ymal
+              subPath: frigate-config.yaml
             - name: storage
               mountPath: /media/frigate
             - name: cache
