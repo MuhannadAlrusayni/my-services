@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kfo-website-deployment
+  namespace: kfo-website
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kfo-website
+  template:
+    metadata:
+      labels:
+        app: kfo-website
+    spec:
+      containers:
+        - name: kfo-website
+          image: ghcr.io/kfo-solutions/website:sha-552ad25
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+              name: http
