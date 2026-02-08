@@ -6,3 +6,4 @@ metadata:
 data:
   LIBVA_DRIVER_NAME: "radeonsi"
   FFmpeg_HWACCEL: "vaapi"
+  HSA_OVERRIDE_GFX_VERSION: "11.0.3"

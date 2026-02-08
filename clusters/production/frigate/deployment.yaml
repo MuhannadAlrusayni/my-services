@@ -46,6 +46,8 @@ spec:
               mountPath: /media/frigate
             - name: cache
               mountPath: /tmp/cache
+            - name: shm
+              mountPath: /dev/shm
             - name: dri
               mountPath: /dev/dri
             - name: kfd
@@ -70,6 +72,10 @@ spec:
           emptyDir:
             medium: Memory
             sizeLimit: 1Gi
+        - name: shm
+          emptyDir:
+            medium: Memory
+            sizeLimit: 256Mi
         - name: dri
           hostPath:
             path: /dev/dri
