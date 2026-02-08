@@ -3,3 +3,4 @@ clusters/production/vaultwarden/secret.yaml
 clusters/production/rustfs/secret.yaml
 clusters/production/cert-manager/secret.yaml
 clusters/production/frigate/secret.yaml
+clusters/production/kfo-services/website/ghcr-secret.yaml
