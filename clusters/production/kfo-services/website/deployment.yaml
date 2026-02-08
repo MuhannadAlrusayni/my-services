@@ -13,6 +13,8 @@ spec:
       labels:
         app: kfo-website
     spec:
+      imagePullSecrets:
+        - name: ghcr-secret
       containers:
         - name: kfo-website
           image: ghcr.io/kfo-solutions/website:sha-552ad25
