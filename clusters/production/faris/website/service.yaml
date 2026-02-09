@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: kfo-website-service
-  namespace: kfo-website
+  name: faris-website-service
+  namespace: faris-website
 spec:
   selector:
-    app: kfo-website
+    app: faris-website
   ports:
     - name: http
       protocol: TCP
