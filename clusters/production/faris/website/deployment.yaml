@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: faris-website-deployment
+  namespace: faris-website
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: faris-website
+  template:
+    metadata:
+      labels:
+        app: faris-website
+    spec:
+      imagePullSecrets:
+        - name: ghcr-secret
+      containers:
+        - name: faris-website
+          image: ghcr.io/faris193/graduation-project-docker:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+              name: http

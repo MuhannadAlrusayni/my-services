@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: faris-website
+  namespace: faris-website
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    kubernetes.io/ingress.class: "traefik"
+spec:
+  rules:
+    - host: "faris.malrusayni.com"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: faris-website-service
+                port:
+                  number: 8080
+  tls:
+    - hosts:
+        - "faris.malrusayni.com"
+      secretName: faris-website-tls
