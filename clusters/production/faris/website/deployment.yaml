@@ -20,5 +20,5 @@ spec:
           image: ghcr.io/faris193/graduation-project-docker:latest
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 8080
+            - containerPort: 80
               name: http
