@@ -3,7 +3,7 @@ apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImageRepository
 metadata:
   name: kfo-website
-  namespace: flux-system
+  namespace: kfo-website
 spec:
   image: ghcr.io/kfo-solutions/website
   interval: 1m0s
