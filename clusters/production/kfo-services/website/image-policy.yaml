@@ -1,0 +1,20 @@
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImagePolicy
+metadata:
+  name: kfo-website-versioned
+  namespace: kfo-website
+spec:
+  imageRepositoryRef:
+    name: kfo-website
+  policy:
+    # pattern: "^([0-9]{4}\\.[0-9]{2}\\.[0-9]{2}\\.[0-9]{4})$"
+    # type: semver
+    # Note: semver type is not strictly correct for this tag format,
+    # but pattern will restrict to tags like 2026.02.14.0931
+    # If you want to always pick the latest, use alphabetical ordering:
+    type: alphabetical
+    order: asc|desc
+    pattern: "^([0-9]{4}\\.[0-9]{2}\\.[0-9]{2}\\.[0-9]{4})$"
+  filterTags:
+    pattern: "^([0-9]{4}\\.[0-9]{2}\\.[0-9]{2}\\.[0-9]{4})$"
+    extract: "$1"
