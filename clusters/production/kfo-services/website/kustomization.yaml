@@ -6,3 +6,5 @@ resources:
   - deployment.yaml
   - service.yaml
   - ingress.yaml
+  - image-repo.yaml
+  - image-policy.yaml
