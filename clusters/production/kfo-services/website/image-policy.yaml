@@ -14,7 +14,6 @@ spec:
     # If you want to always pick the latest, use alphabetical ordering:
     type: alphabetical
     # order: asc|desc
-    pattern: "^([0-9]{4}\\.[0-9]{2}\\.[0-9]{2}\\.[0-9]{4})$"
   filterTags:
     pattern: "^([0-9]{4}\\.[0-9]{2}\\.[0-9]{2}\\.[0-9]{4})$"
     extract: "$1"
