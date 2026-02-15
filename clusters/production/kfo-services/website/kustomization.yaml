@@ -3,8 +3,8 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - ghcr-secret-sealed.yaml
-  - deployment.yaml
   - service.yaml
   - ingress.yaml
   - image-repo.yaml
   - image-policy.yaml
+  - deployment.yaml
