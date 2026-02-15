@@ -6,6 +6,7 @@ metadata:
 spec:
   imageRepositoryRef:
     name: kfo-website
+    namespace: kfo-website
   policy:
     alphabetical:
       order: asc

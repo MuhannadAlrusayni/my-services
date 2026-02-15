@@ -9,3 +9,4 @@ spec:
   interval: 1m0s
   secretRef:
     name: ghcr-secret
+    namespace: kfo-website
