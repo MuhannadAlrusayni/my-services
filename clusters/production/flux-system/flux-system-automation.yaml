@@ -13,7 +13,7 @@ spec:
       author:
         email: fluxcdbot@users.noreply.github.com
         name: fluxcdbot
-      messageTemplate: "docker image version bump {{range .Changed.Changes}}{{print .OldValue}} -> {{println .NewValue}}{{end}}"
+      messageTemplate: "docker image version bump from {{range .Changed.Changes}}{{print .OldValue}} to {{println .NewValue}}{{end}}"
     push:
       branch: main
   interval: 30m0s
