@@ -22,5 +22,5 @@ spec:
     kind: GitRepository
     name: flux-system
   update:
-    path: ./clusters/production
+    path: ./clusters/production/kfo-services/website
     strategy: Setters

@@ -5,6 +5,7 @@ resources:
   - ghcr-secret-sealed.yaml
   - service.yaml
   - ingress.yaml
+  - deployment.yaml
   - image-repo.yaml
   - image-policy.yaml
-  - deployment.yaml
+  - flux-system-automation.yaml
