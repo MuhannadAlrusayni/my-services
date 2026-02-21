@@ -5,3 +5,6 @@ clusters/production/cert-manager/secret.yaml
 clusters/production/frigate/secret.yaml
 #clusters/production/kfo-services/website/ghcr-secret.yaml
 clusters/production/kfo-services/website/ghcr-secret.yaml
+
+**/*secret.yaml
+**/*secret.yml
