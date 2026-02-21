@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: faris-weather-deployment
+  namespace: faris-weather
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: faris-weather
+  template:
+    metadata:
+      labels:
+        app: faris-weather
+    spec:
+      imagePullSecrets:
+        - name: ghcr-secret
+      containers:
+        - name: faris-weather
+          image: ghcr.io/faris193/webweather:2026.02.19.0800 # {"$imagepolicy": "faris-weather:calver"}
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+              name: http
