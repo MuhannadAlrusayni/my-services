@@ -1,0 +1,53 @@
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageUpdateAutomation
+metadata:
+  name: faris-weather
+  namespace: faris-weather
+spec:
+  git:
+    checkout:
+      ref:
+        branch: main
+    commit:
+      author:
+        email: fluxcdbot@users.noreply.github.com
+        name: fluxcdbot
+      messageTemplate: |
+        {{range .Changed.Changes}}{{print .OldValue}} -> {{println .NewValue}}{{end}}
+    push:
+      branch: main
+  interval: 1m0s
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  update:
+    path: ./clusters/production/faris/weather
+    strategy: Setters
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImagePolicy
+metadata:
+  name: calver
+  namespace: faris-weather
+spec:
+  filterTags:
+    extract: $1
+    pattern: ^([0-9]{4}\.[0-9]{2}\.[0-9]{2}\.[0-9]{4})$
+  imageRepositoryRef:
+    name: faris-weather
+  policy:
+    alphabetical:
+      order: asc
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageRepository
+metadata:
+  name: faris-weather
+  namespace: faris-weather
+spec:
+  image: ghcr.io/faris193/webweather
+  interval: 1m0s
+  secretRef:
+    name: ghcr-secret

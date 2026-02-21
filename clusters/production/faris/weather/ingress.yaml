@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: faris-weather
+  namespace: faris-weather
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    kubernetes.io/ingress.class: "traefik"
+spec:
+  rules:
+    - host: "faris-weather.malrusayni.com"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: faris-weather-service
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - "faris-weather.malrusayni.com"
+      secretName: faris-weather-tls

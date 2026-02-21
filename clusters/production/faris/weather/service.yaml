@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: faris-weather-service
+  namespace: faris-weather
+spec:
+  selector:
+    app: faris-weather
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: http
