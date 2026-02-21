@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: faris-protoflio-deployment
+  namespace: faris-protoflio
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: faris-protoflio
+  template:
+    metadata:
+      labels:
+        app: faris-protoflio
+    spec:
+      imagePullSecrets:
+        - name: ghcr-secret
+      containers:
+        - name: faris-protoflio
+          image: ghcr.io/faris193/protoflio:2026.02.19.0744 # {"$imagepolicy": "faris-protoflio:calver"}
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+              name: http
