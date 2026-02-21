@@ -17,7 +17,7 @@ spec:
         - name: ghcr-secret
       containers:
         - name: faris-weather
-          image: ghcr.io/faris193/webweather:2026.02.19.0800 # {"$imagepolicy": "faris-weather:calver"}
+          image: ghcr.io/faris193/webweather:2026.02.19.0842 # {"$imagepolicy": "faris-weather:calver"}
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
