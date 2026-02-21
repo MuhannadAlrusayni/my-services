@@ -20,5 +20,5 @@ spec:
           image: ghcr.io/faris193/webweather:2026.02.19.0842 # {"$imagepolicy": "faris-weather:calver"}
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 80
+            - containerPort: 3000
               name: http
