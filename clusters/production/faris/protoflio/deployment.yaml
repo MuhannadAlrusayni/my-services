@@ -17,7 +17,7 @@ spec:
         - name: ghcr-secret
       containers:
         - name: faris-protoflio
-          image: ghcr.io/faris193/protoflio:2026.02.28.1626 # {"$imagepolicy": "faris-protoflio:calver"}
+          image: ghcr.io/faris193/protoflio:2026.02.28.1644 # {"$imagepolicy": "faris-protoflio:calver"}
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
