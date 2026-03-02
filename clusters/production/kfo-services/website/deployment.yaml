@@ -17,7 +17,7 @@ spec:
         - name: ghcr-secret
       containers:
         - name: kfo-website
-          image: ghcr.io/kfo-solutions/website:2026.03.01.0201 # {"$imagepolicy": "kfo-website:kfo-website"}
+          image: ghcr.io/kfo-solutions/website:2026.03.02.0434 # {"$imagepolicy": "kfo-website:kfo-website"}
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
