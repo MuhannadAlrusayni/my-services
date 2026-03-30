@@ -17,7 +17,7 @@ spec:
         - name: ghcr-secret
       containers:
         - name: faris-sanad
-          image: ghcr.io/faris193/graduation-project-docker:latest
+          image: ghcr.io/faris193/sanad:2026.03.30.1903 # {"$imagepolicy": "faris-sanad:calver"}
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
