@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: faris-sanad-service
+  namespace: faris-sanad
+spec:
+  selector:
+    app: faris-sanad
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: http
