@@ -3,5 +3,7 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - ghcr-secret-sealed.yaml
+  - secret-sealed.yaml
+  - pg-cluster.yaml
   - deployment.yaml
   - service.yaml

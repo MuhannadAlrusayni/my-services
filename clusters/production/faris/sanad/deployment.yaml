@@ -19,6 +19,12 @@ spec:
         - name: faris-sanad
           image: ghcr.io/faris193/sanad:2026.03.30.1903 # {"$imagepolicy": "faris-sanad:calver"}
           imagePullPolicy: IfNotPresent
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: sanad-postgresql-secret
+                  key: DATABASE_URL
           ports:
             - containerPort: 80
               name: http
