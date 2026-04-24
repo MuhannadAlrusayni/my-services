@@ -23,7 +23,7 @@ spec:
     name: flux-system
     namespace: flux-system
   update:
-    path: ./clusters/production/faris/protoflio
+    path: ./clusters/production/faris/sanad
     strategy: Setters
 ---
 apiVersion: image.toolkit.fluxcd.io/v1
