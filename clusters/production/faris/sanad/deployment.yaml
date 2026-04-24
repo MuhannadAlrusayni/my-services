@@ -17,7 +17,7 @@ spec:
         - name: ghcr-secret
       containers:
         - name: faris-sanad
-          image: ghcr.io/faris193/sanad:2026.04.24.1539 # {"$imagepolicy": "faris-sanad:calver"}
+          image: ghcr.io/faris193/sanad:2026.04.24.1707 # {"$imagepolicy": "faris-sanad:calver"}
           imagePullPolicy: IfNotPresent
           env:
             - name: DATABASE_URL
