@@ -7,3 +7,4 @@ resources:
   - pg-cluster.yaml
   - deployment.yaml
   - service.yaml
+  - image-automation.yaml
