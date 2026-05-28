@@ -1,73 +1,136 @@
 tls:
-  enabled: False
+  enabled: false
+
+auth:
+  cookie_secure: true
 
 mqtt:
   enabled: false
 
-#detectors:
-# rocm:
-#   type: rocm
-
-#model:
-# model_type: yolonas
-# width: 416
-# height: 416
-# input_pixel_format: bgr
-# path: /config/yolov4.onnx
-# labelmap_path: /labelmap/coco-80.txt
-
 record:
   enabled: true
   retain:
-    days: 15 # Store recordings for 30 days
-    mode: motion # 'motion' only saves clips with motion; use 'all' for continuous recording
+    days: 3
+    mode: motion
   alerts:
     retain:
-      days: 35
+      days: 10
   detections:
     retain:
-      days: 35
+      days: 10
 
 ffmpeg:
   output_args:
     record: preset-record-generic-audio-aac
 
 audio:
-  enabled: True
+  enabled: true
 
 snapshots:
   enabled: true
   retain:
-    default: 30
+    default: 10
 
 go2rtc:
   streams:
-    outdoor_cam_main:
-      - rtsp://admin:4557C@m4557@192.168.100.173:554/cam/realmonitor?channel=1&subtype=0
-      - "ffmpeg:rtsp_cam#audio=opus"
-    outdoor_cam_sub:
-      - rtsp://admin:4557C@m4557@192.168.100.173:554/cam/realmonitor?channel=1&subtype=1
-      - "ffmpeg:rtsp_cam#audio=opus"
+    sara_room_cam_main:
+      - rtsp://{FRIGATE_CAM_RTSP_USERNAME}:{FRIGATE_CAM_RTSP_PASSWORD}@192.168.100.173:554/cam/realmonitor?channel=1&subtype=0&transport=tcp
+      - ffmpeg:sara_room_cam_main#audio=aac
+    sara_room_cam_sub:
+      - rtsp://{FRIGATE_CAM_RTSP_USERNAME}:{FRIGATE_CAM_RTSP_PASSWORD}@192.168.100.173:554/cam/realmonitor?channel=1&subtype=1&transport=tcp
+    entrance_area_cam_main:
+      - rtsp://{FRIGATE_CAM_RTSP_USERNAME}:{FRIGATE_CAM_RTSP_PASSWORD}@192.168.100.172:554/cam/realmonitor?channel=1&subtype=0&transport=tcp
+      - ffmpeg:entrance_area_cam_main#audio=aac
+    entrance_area_cam_sub:
+      - rtsp://{FRIGATE_CAM_RTSP_USERNAME}:{FRIGATE_CAM_RTSP_PASSWORD}@192.168.100.172:554/cam/realmonitor?channel=1&subtype=1&transport=tcp
+    living_room_cam_main:
+      - rtsp://{FRIGATE_CAM_RTSP_USERNAME}:{FRIGATE_CAM_RTSP_PASSWORD}@192.168.100.171:554/cam/realmonitor?channel=1&subtype=0&transport=tcp
+      - ffmpeg:living_room_cam_main#audio=aac
+    living_room_cam_sub:
+      - rtsp://{FRIGATE_CAM_RTSP_USERNAME}:{FRIGATE_CAM_RTSP_PASSWORD}@192.168.100.171:554/cam/realmonitor?channel=1&subtype=1&transport=tcp
 
 cameras:
-  outdoor_camera:
+  sara_room_camera:
     enabled: true
     audio:
-      enabled: True
+      enabled: true
+    onvif:
+      host: 192.168.100.173
+      port: 80
+      user: "{FRIGATE_CAM_RTSP_USERNAME}"
+      password: "{FRIGATE_CAM_RTSP_PASSWORD}"
+      tls_insecure: false
+      ignore_time_mismatch: false
     ffmpeg:
       inputs:
-        - path: rtsp://127.0.0.1:8554/outdoor_cam_main
+        - path: rtsp://127.0.0.1:8554/sara_room_cam_main
           roles:
-            - record # High-resolution stream for recording
-        - path: rtsp://127.0.0.1:8554/outdoor_cam_sub
-          roles:
-            - detect # Low-resolution stream for faster motion detection
+            - record
             - audio
+        - path: rtsp://127.0.0.1:8554/sara_room_cam_sub
+          roles:
+            - detect
     live:
-      stream_name: outdoor_cam_sub
+      stream_name: sara_room_cam_main
     detect:
-      width: 704 # Set this to your camera's resolution
+      width: 704
       height: 480
-      fps: 5 # Adjust based on your camera capabilities
+      fps: 5
+  entrance_area_camera:
+    enabled: true
+    audio:
+      enabled: true
+    onvif:
+      host: 192.168.100.172
+      port: 80
+      user: "{FRIGATE_CAM_RTSP_USERNAME}"
+      password: "{FRIGATE_CAM_RTSP_PASSWORD}"
+      tls_insecure: false
+      ignore_time_mismatch: false
+    ffmpeg:
+      inputs:
+        - path: rtsp://127.0.0.1:8554/entrance_area_cam_main
+          roles:
+            - record
+            - audio
+        - path: rtsp://127.0.0.1:8554/entrance_area_cam_sub
+          roles:
+            - detect
+    live:
+      stream_name: entrance_area_cam_main
+    detect:
+      width: 704
+      height: 480
+      fps: 5
+  living_room_camera:
+    enabled: true
+    audio:
+      enabled: true
+    onvif:
+      host: 192.168.100.171
+      port: 80
+      user: "{FRIGATE_CAM_RTSP_USERNAME}"
+      password: "{FRIGATE_CAM_RTSP_PASSWORD}"
+      tls_insecure: false
+      ignore_time_mismatch: false
+    ffmpeg:
+      inputs:
+        - path: rtsp://127.0.0.1:8554/living_room_cam_main
+          roles:
+            - record
+            - audio
+        - path: rtsp://127.0.0.1:8554/living_room_cam_sub
+          roles:
+            - detect
+    live:
+      stream_name: living_room_cam_main
+    detect:
+      width: 704
+      height: 480
+      fps: 5
 
-version: 0.15-1
+version: 0.16-0
+detect:
+  enabled: true
+motion:
+  enabled: true
