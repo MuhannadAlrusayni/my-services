@@ -48,6 +48,12 @@ go2rtc:
       - ffmpeg:living_room_camera#audio=aac
     living_room_cam_sub:
       - rtsp://{FRIGATE_CAM_RTSP_USERNAME}:{FRIGATE_CAM_RTSP_PASSWORD}@192.168.100.171:554/cam/realmonitor?channel=1&subtype=1&transport=tcp#backchannel=0
+    sara_room_camera_twoway:
+      - rtsp://{FRIGATE_CAM_RTSP_USERNAME}:{FRIGATE_CAM_RTSP_PASSWORD}@192.168.100.173:554/cam/realmonitor?channel=1&subtype=0&transport=tcp
+    entrance_area_camera_twoway:
+      - rtsp://{FRIGATE_CAM_RTSP_USERNAME}:{FRIGATE_CAM_RTSP_PASSWORD}@192.168.100.172:554/cam/realmonitor?channel=1&subtype=0&transport=tcp
+    living_room_camera_twoway:
+      - rtsp://{FRIGATE_CAM_RTSP_USERNAME}:{FRIGATE_CAM_RTSP_PASSWORD}@192.168.100.171:554/cam/realmonitor?channel=1&subtype=0&transport=tcp
 
 cameras:
   sara_room_camera:
