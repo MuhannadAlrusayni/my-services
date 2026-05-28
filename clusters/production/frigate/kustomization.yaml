@@ -7,7 +7,7 @@ resources:
   - secret-sealed.yaml
   - config-pvc.yaml
   - storage-pvc.yaml
-  # - deployment.yaml
+  - deployment.yaml
   - service.yaml
   - ingress.yaml
 
