@@ -71,7 +71,7 @@ spec:
         - name: cache
           emptyDir:
             medium: Memory
-            sizeLimit: 1Gi
+            sizeLimit: 3Gi
         - name: shm
           emptyDir:
             medium: Memory
