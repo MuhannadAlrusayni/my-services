@@ -210,9 +210,9 @@ git commit -m "fix: increase frigate recording cache from 1Gi to 3Gi for 4-camer
 
 ### Task 3: Deploy to cluster
 
-- [ ] **Step 1: Copy updated config to the running pod**
+The deployment is managed by FluxCD — push to git and it reconciles automatically. The Frigate config file is an exception: it lives on a PVC (not managed by kustomize/FluxCD), so it must be copied to the pod manually. Do the copy first so the new config is on the PVC before FluxCD restarts the pod.
 
-The Frigate config lives on a PVC, not from the kustomization — update it directly on the pod:
+- [ ] **Step 1: Copy updated config to the running pod (updates the PVC)**
 
 ```bash
 FRIGATE_POD=$(kubectl get pod -n frigate -l app=frigate -o jsonpath='{.items[0].metadata.name}')
@@ -221,18 +221,19 @@ kubectl cp clusters/production/frigate/frigate-config.yaml frigate/${FRIGATE_POD
 
 Expected: no output (silent success)
 
-- [ ] **Step 2: Apply deployment change (triggers pod restart)**
+- [ ] **Step 2: Push to git (FluxCD picks up the deployment.yaml change and restarts the pod)**
 
 ```bash
-kubectl apply -k clusters/production/frigate/
+git push
 ```
 
-Expected output includes:
-```
-deployment.apps/frigate configured
+- [ ] **Step 3: Wait for FluxCD to reconcile**
+
+```bash
+flux reconcile kustomization flux-system --with-source
 ```
 
-- [ ] **Step 3: Wait for pod to be ready**
+Then wait for the pod to be ready:
 
 ```bash
 kubectl rollout status deployment/frigate -n frigate --timeout=120s
