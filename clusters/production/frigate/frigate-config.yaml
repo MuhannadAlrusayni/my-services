@@ -45,9 +45,20 @@ go2rtc:
       - rtsp://{FRIGATE_CAM_RTSP_USERNAME}:{FRIGATE_CAM_RTSP_PASSWORD}@192.168.100.171:554/cam/realmonitor?channel=1&subtype=0&transport=tcp#backchannel=0
     living_room_cam_sub:
       - rtsp://{FRIGATE_CAM_RTSP_USERNAME}:{FRIGATE_CAM_RTSP_PASSWORD}@192.168.100.171:554/cam/realmonitor?channel=1&subtype=1&transport=tcp#backchannel=0
+    sara_room_camera_live:
+      - rtsp://{FRIGATE_CAM_RTSP_USERNAME}:{FRIGATE_CAM_RTSP_PASSWORD}@192.168.100.173:554/cam/realmonitor?channel=1&subtype=0&transport=tcp
+      - "ffmpeg:sara_room_camera_live#audio=opus#backchannel=0"
+    entrance_area_camera_live:
+      - rtsp://{FRIGATE_CAM_RTSP_USERNAME}:{FRIGATE_CAM_RTSP_PASSWORD}@192.168.100.172:554/cam/realmonitor?channel=1&subtype=0&transport=tcp
+      - "ffmpeg:entrance_area_camera_live#audio=opus#backchannel=0"
+    living_room_camera_live:
+      - rtsp://{FRIGATE_CAM_RTSP_USERNAME}:{FRIGATE_CAM_RTSP_PASSWORD}@192.168.100.171:554/cam/realmonitor?channel=1&subtype=0&transport=tcp
+      - "ffmpeg:living_room_camera_live#audio=opus#backchannel=0"
 
 cameras:
   sara_room_camera:
+    live:
+      stream_name: sara_room_camera_live
     enabled: true
     audio:
       enabled: true
@@ -72,6 +83,8 @@ cameras:
       height: 480
       fps: 5
   entrance_area_camera:
+    live:
+      stream_name: entrance_area_camera_live
     enabled: true
     audio:
       enabled: true
@@ -96,6 +109,8 @@ cameras:
       height: 480
       fps: 5
   living_room_camera:
+    live:
+      stream_name: living_room_camera_live
     enabled: true
     audio:
       enabled: true
