@@ -57,6 +57,9 @@ go2rtc:
 
 cameras:
   sara_room_camera:
+    live:
+      streams:
+        main_stream: sara_room_camera_live
     enabled: true
     audio:
       enabled: true
@@ -81,6 +84,9 @@ cameras:
       height: 480
       fps: 5
   entrance_area_camera:
+    live:
+      streams:
+        main_stream: entrance_area_camera_live
     enabled: true
     audio:
       enabled: true
@@ -105,6 +111,9 @@ cameras:
       height: 480
       fps: 5
   living_room_camera:
+    live:
+      streams:
+        main_stream: living_room_camera_live
     enabled: true
     audio:
       enabled: true
