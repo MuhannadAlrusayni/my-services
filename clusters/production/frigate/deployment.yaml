@@ -18,7 +18,7 @@ spec:
         device-kfd: "true"
       containers:
         - name: frigate
-          image: ghcr.io/blakeblackshear/frigate:stable-rocm
+          image: ghcr.io/blakeblackshear/frigate:0.17.1-rocm
           envFrom:
             - configMapRef:
                 name: frigate-env
