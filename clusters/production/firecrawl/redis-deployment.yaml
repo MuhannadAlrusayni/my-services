@@ -18,20 +18,7 @@ spec:
       containers:
         - name: redis
           image: redis:alpine
-          command: ["/bin/sh", "-c"]
-          args:
-            - |
-              if [ -n "$REDIS_PASSWORD" ]; then
-                exec redis-server --bind 0.0.0.0 --requirepass "$REDIS_PASSWORD" --save 60 1
-              else
-                exec redis-server --bind 0.0.0.0 --save 60 1
-              fi
-          env:
-            - name: REDIS_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: firecrawl-secret
-                  key: REDIS_PASSWORD
+          args: ["--bind", "0.0.0.0", "--save", "60", "1"]
           ports:
             - containerPort: 6379
           volumeMounts:
