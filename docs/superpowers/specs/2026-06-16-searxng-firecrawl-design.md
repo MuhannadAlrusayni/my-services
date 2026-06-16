@@ -13,6 +13,7 @@ Two independent namespaces, each managed as a plain-manifest Flux kustomization 
 clusters/production/
 ├── searxng/
 │   ├── namespace.yaml
+│   ├── configmap.yaml         # settings.yml
 │   ├── deployment.yaml
 │   ├── service.yaml
 │   ├── ingress.yaml
@@ -46,9 +47,21 @@ Hermes accesses both services via NodePort on the node's IP. Traefik ingress wit
 
 ### Deployment
 - Single replica
-- Stateless — no PVC required
-- Default settings.yaml baked into image
-- Secret mounted as env var: `SEARXNG_SECRET_KEY`
+- **Volumes required** (entrypoint will error if these directories don't exist):
+  - `/etc/searxng` — mounted from ConfigMap (contains `settings.yml`)
+  - `/var/cache/searxng` — `emptyDir` (favicon cache; no persistence needed)
+- Secret key passed via `SEARXNG_SECRET` env var (overrides value in `settings.yml`)
+- No Valkey/Redis needed — rate limiting disabled via `limiter: false` in settings.yml (hermes is a trusted client)
+
+### ConfigMap (`searxng-config`)
+Mounted as a volume providing `/etc/searxng/settings.yml`:
+```yaml
+use_default_settings: true
+server:
+  limiter: false
+  image_proxy: true
+```
+The `secret_key` field is intentionally omitted — it is supplied at runtime via the `SEARXNG_SECRET` env var from the SealedSecret.
 
 ### Service
 - Type: `NodePort`
@@ -57,7 +70,7 @@ Hermes accesses both services via NodePort on the node's IP. Traefik ingress wit
 - Also accessible in-cluster on port 8080
 
 ### Secret (sealed)
-- Key: `SEARXNG_SECRET_KEY`
+- Key: `SEARXNG_SECRET` (env var name per official docs)
 - Value: random hex string (generate with `openssl rand -hex 32`)
 - Stored as a SealedSecret
 
