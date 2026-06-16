@@ -60,7 +60,12 @@ use_default_settings: true
 server:
   limiter: false
   image_proxy: true
+search:
+  formats:
+    - html
+    - json
 ```
+`search.formats` must include `json` so Firecrawl can call `/search?format=json`.
 The `secret_key` field is intentionally omitted — it is supplied at runtime via the `SEARXNG_SECRET` env var from the SealedSecret.
 
 ### Service
@@ -119,6 +124,7 @@ Six deployments in the `firecrawl` namespace:
 | `IS_KUBERNETES` | `true` |
 | `NUQ_DATABASE_URL` | `postgresql://firecrawl:<pw>@nuq-postgres:5432/firecrawl` |
 | `PORT` | `3002` |
+| `SEARXNG_ENDPOINT` | `http://searxng.searxng.svc.cluster.local:8080` |
 
 ### Secret (sealed) — `firecrawl-secret`
 | Key | Notes |
@@ -162,7 +168,7 @@ All values sealed with `kubeseal` before committing.
 Firecrawl API requests: `Authorization: Bearer <FIRECRAWL_API_KEY>` header.
 Queue admin UI: `http://<node-ip>:3002/admin/<BULL_AUTH_KEY>/queues`
 
-**SearXNG + Firecrawl integration:** Firecrawl's `/search` API can use SearXNG as its backend by setting `SEARXNG_ENDPOINT=http://searxng.searxng.svc.cluster.local:8080` in the Firecrawl ConfigMap. This is optional but means hermes can use a single Firecrawl call for both search and scrape.
+**SearXNG + Firecrawl integration:** Firecrawl's `/search` API routes through SearXNG via `SEARXNG_ENDPOINT` in the ConfigMap. Hermes only needs to call Firecrawl for both search and scrape — SearXNG is an internal implementation detail.
 
 ---
 
