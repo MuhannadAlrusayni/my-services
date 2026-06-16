@@ -1,0 +1,17 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: firecrawl
+resources:
+  - namespace.yaml
+  - configmap.yaml
+  - secret-sealed.yaml
+  - redis-pvc.yaml
+  - redis-deployment.yaml
+  - nuq-postgres-pvc.yaml
+  - nuq-postgres-deployment.yaml
+  - playwright-deployment.yaml
+  - api-deployment.yaml
+  - worker-deployment.yaml
+  - nuq-worker-deployment.yaml
+  - service.yaml
+  - ingress.yaml

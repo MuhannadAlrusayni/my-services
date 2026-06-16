@@ -71,7 +71,7 @@ The `secret_key` field is intentionally omitted — it is supplied at runtime vi
 ### Service
 - Type: `NodePort`
 - Container port: `8080`
-- NodePort: **9889** (fixed)
+- NodePort: **30889** (fixed)
 - Also accessible in-cluster on port 8080
 
 ### Secret (sealed)
@@ -162,11 +162,11 @@ All values sealed with `kubeseal` before committing.
 
 | Service   | Access URL (from node)  | NodePort |
 |-----------|-------------------------|----------|
-| SearXNG   | `http://<node-ip>:9889` | 9889     |
-| Firecrawl | `http://<node-ip>:3002` | 3002     |
+| SearXNG   | `http://<node-ip>:30889` | 9889     |
+| Firecrawl | `http://<node-ip>:30302` | 3002     |
 
 Firecrawl API requests: `Authorization: Bearer <FIRECRAWL_API_KEY>` header.
-Queue admin UI: `http://<node-ip>:3002/admin/<BULL_AUTH_KEY>/queues`
+Queue admin UI: `http://<node-ip>:30302/admin/<BULL_AUTH_KEY>/queues`
 
 **SearXNG + Firecrawl integration:** Firecrawl's `/search` API routes through SearXNG via `SEARXNG_ENDPOINT` in the ConfigMap. Hermes only needs to call Firecrawl for both search and scrape — SearXNG is an internal implementation detail.
 
