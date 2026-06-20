@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: open-design
+  namespace: open-design
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: open-design
+  template:
+    metadata:
+      labels:
+        app: open-design
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: open-design
+          image: ghcr.io/nexu-io/od:latest
+          ports:
+            - containerPort: 7456
+          envFrom:
+            - configMapRef:
+                name: open-design-config
+            - secretRef:
+                name: open-design-secret
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          volumeMounts:
+            - name: data
+              mountPath: /app/.od
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 7456
+            initialDelaySeconds: 15
+            periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 7456
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: open-design-data

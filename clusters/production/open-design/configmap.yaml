@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: open-design-config
+  namespace: open-design
+data:
+  OPEN_DESIGN_PORT: "7456"
+  OPEN_DESIGN_ALLOWED_ORIGINS: "https://open-design.malrusayni.com"
