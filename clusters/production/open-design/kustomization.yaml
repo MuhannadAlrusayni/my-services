@@ -4,6 +4,7 @@ namespace: open-design
 resources:
   - namespace.yaml
   - configmap.yaml
+  - ghcr-secret-sealed.yaml
   - secret-sealed.yaml
   - pvc.yaml
   - deployment.yaml

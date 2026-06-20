@@ -13,6 +13,8 @@ spec:
       labels:
         app: open-design
     spec:
+      imagePullSecrets:
+        - name: ghcr-secret
       terminationGracePeriodSeconds: 30
       containers:
         - name: open-design
