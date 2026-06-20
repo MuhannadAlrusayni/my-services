@@ -8,3 +8,4 @@ clusters/production/kfo-services/website/ghcr-secret.yaml
 
 **/*secret.yaml
 **/*secret.yml
+.superpowers/
