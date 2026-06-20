@@ -1,0 +1,30 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: harbor-pg
+  namespace: harbor
+spec:
+  instances: 1
+
+  postgresql:
+    parameters:
+      max_connections: "50"
+      shared_buffers: "128MB"
+
+  bootstrap:
+    initdb:
+      database: harbor
+      owner: harbor
+      secret:
+        name: harbor-pg-secret
+
+  storage:
+    size: 5Gi
+
+  resources:
+    requests:
+      memory: "128Mi"
+      cpu: "100m"
+    limits:
+      memory: "512Mi"
+      cpu: "500m"
