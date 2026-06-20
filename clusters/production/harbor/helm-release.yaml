@@ -1,0 +1,64 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: harbor
+  namespace: harbor
+spec:
+  interval: 10m
+  chart:
+    spec:
+      chart: harbor
+      sourceRef:
+        kind: HelmRepository
+        name: harbor
+  values:
+    expose:
+      type: ingress
+      tls:
+        enabled: false
+      ingress:
+        hosts:
+          core: harbor.malrusayni.com
+        controller: none
+    externalURL: https://harbor.malrusayni.com
+    database:
+      type: external
+      external:
+        host: harbor-pg-rw.harbor.svc
+        port: 5432
+        username: harbor
+        password: ""
+    redis:
+      type: internal
+    persistence:
+      enabled: true
+      persistentVolumeClaim:
+        registry:
+          size: 300Gi
+    trivy:
+      enabled: true
+    core:
+      resources:
+        requests:
+          memory: "256Mi"
+          cpu: "100m"
+        limits:
+          memory: "512Mi"
+          cpu: "500m"
+    registry:
+      resources:
+        requests:
+          memory: "256Mi"
+          cpu: "100m"
+        limits:
+          memory: "512Mi"
+          cpu: "500m"
+  valuesFrom:
+    - kind: Secret
+      name: harbor-admin-secret
+      valuesKey: HARBOR_ADMIN_PASSWORD
+      targetPath: harborAdminPassword
+    - kind: Secret
+      name: harbor-pg-secret
+      valuesKey: password
+      targetPath: database.external.password
