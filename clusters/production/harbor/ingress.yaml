@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: harbor
+  namespace: harbor
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    kubernetes.io/ingress.class: "traefik"
+spec:
+  rules:
+    - host: "harbor.malrusayni.com"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: harbor-portal
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - "harbor.malrusayni.com"
+      secretName: harbor-tls
