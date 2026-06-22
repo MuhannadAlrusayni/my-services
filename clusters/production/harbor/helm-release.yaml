@@ -27,7 +27,6 @@ spec:
         host: harbor-pg-rw.harbor.svc
         port: 5432
         username: harbor
-        password: ""
     redis:
       type: internal
     persistence:
