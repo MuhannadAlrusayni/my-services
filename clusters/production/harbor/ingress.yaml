@@ -11,6 +11,41 @@ spec:
     - host: "harbor.malrusayni.com"
       http:
         paths:
+          - path: /api/
+            pathType: Prefix
+            backend:
+              service:
+                name: harbor-core
+                port:
+                  number: 80
+          - path: /c/
+            pathType: Prefix
+            backend:
+              service:
+                name: harbor-core
+                port:
+                  number: 80
+          - path: /v2/
+            pathType: Prefix
+            backend:
+              service:
+                name: harbor-core
+                port:
+                  number: 80
+          - path: /service/
+            pathType: Prefix
+            backend:
+              service:
+                name: harbor-core
+                port:
+                  number: 80
+          - path: /chartrepo/
+            pathType: Prefix
+            backend:
+              service:
+                name: harbor-core
+                port:
+                  number: 80
           - path: /
             pathType: Prefix
             backend:
