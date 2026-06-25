@@ -3,8 +3,7 @@ kind: Kustomization
 namespace: honcho
 resources:
   - namespace.yaml
-  - pg-secret-sealed.yaml
-  - pg-cluster.yaml
+  - pg-deployment.yaml
   - redis-deployment.yaml
   - ollama-deployment.yaml
   - configmap.yaml

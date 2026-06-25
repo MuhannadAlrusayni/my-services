@@ -1,0 +1,84 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pg-pvc
+  namespace: honcho
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: honcho-pg-secret
+  namespace: honcho
+stringData:
+  username: honcho
+  password: honcho
+  database: honcho
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: honcho-pg
+  namespace: honcho
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: honcho-pg
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: honcho-pg
+    spec:
+      containers:
+        - name: postgres
+          image: pgvector/pgvector:pg15
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_DB
+              value: honcho
+            - name: POSTGRES_USER
+              value: honcho
+            - name: POSTGRES_PASSWORD
+              value: honcho
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql/data
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          readinessProbe:
+            exec:
+              command: ["pg_isready", "-U", "honcho", "-d", "honcho"]
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: pg-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: honcho-pg
+  namespace: honcho
+spec:
+  selector:
+    app: honcho-pg
+  ports:
+    - port: 5432
+      targetPort: 5432
