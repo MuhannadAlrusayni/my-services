@@ -6,7 +6,7 @@ metadata:
 spec:
   instances: 1
 
-  imageName: pgvector/pgvector:pg15
+  imageName: pgvector/pgvector:15
 
   postgresql:
     parameters:
