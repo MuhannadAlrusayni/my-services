@@ -6,12 +6,13 @@ metadata:
 spec:
   instances: 1
 
-  imageName: pgvector/pgvector:pg15
+  imageName: ghcr.io/cloudnative-pg/postgresql:15.12-7
 
   postgresql:
     parameters:
       max_connections: "50"
       shared_buffers: "128MB"
+      shared_preload_libraries: "vector"
 
   bootstrap:
     initdb:
@@ -19,6 +20,8 @@ spec:
       owner: honcho
       secret:
         name: honcho-pg-secret
+      postInitApplicationSQL:
+        - CREATE EXTENSION IF NOT EXISTS vector;
 
   storage:
     size: 5Gi
