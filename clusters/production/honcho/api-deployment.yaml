@@ -13,6 +13,8 @@ spec:
       labels:
         app: honcho-api
     spec:
+      imagePullSecrets:
+        - name: ghcr-secret
       terminationGracePeriodSeconds: 30
       containers:
         - name: api
