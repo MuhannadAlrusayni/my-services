@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: honcho-api-config
+  namespace: honcho
+data:
+  CACHE_URL: "redis://honcho-redis:6379/0?suppress=true"
+  CACHE_ENABLED: "true"
+  VECTOR_STORE_TYPE: "pgvector"
+  SUMMARY_MODEL_CONFIG__TRANSPORT: "openai"
+  SUMMARY_MODEL_CONFIG__MODEL: "deepseek-v4-flash"
+  SUMMARY_MODEL_CONFIG__OVERRIDES__BASE_URL: "https://opencode.ai/zen/go/v1"
+  AUTH_USE_AUTH: "false"

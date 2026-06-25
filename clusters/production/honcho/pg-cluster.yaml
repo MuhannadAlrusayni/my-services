@@ -1,0 +1,32 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: honcho-pg
+  namespace: honcho
+spec:
+  instances: 1
+
+  imageName: pgvector/pgvector:pg15
+
+  postgresql:
+    parameters:
+      max_connections: "50"
+      shared_buffers: "128MB"
+
+  bootstrap:
+    initdb:
+      database: honcho
+      owner: honcho
+      secret:
+        name: honcho-pg-secret
+
+  storage:
+    size: 5Gi
+
+  resources:
+    requests:
+      memory: "128Mi"
+      cpu: "100m"
+    limits:
+      memory: "512Mi"
+      cpu: "500m"

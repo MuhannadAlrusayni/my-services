@@ -1,0 +1,61 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: redis-pvc
+  namespace: honcho
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: honcho-redis
+  namespace: honcho
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: honcho-redis
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: honcho-redis
+    spec:
+      containers:
+        - name: redis
+          image: redis:8.2-alpine
+          args: ["--bind", "0.0.0.0", "--save", "60", "1"]
+          ports:
+            - containerPort: 6379
+          volumeMounts:
+            - name: data
+              mountPath: /data
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+            limits:
+              memory: "256Mi"
+              cpu: "200m"
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: redis-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: honcho-redis
+  namespace: honcho
+spec:
+  selector:
+    app: honcho-redis
+  ports:
+    - port: 6379
+      targetPort: 6379
