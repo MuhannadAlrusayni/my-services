@@ -6,13 +6,12 @@ metadata:
 spec:
   instances: 1
 
-  imageName: ghcr.io/cloudnative-pg/postgresql:15.12-7
+  imageName: pgvector/pgvector:pg15-trixie
 
   postgresql:
     parameters:
       max_connections: "50"
       shared_buffers: "128MB"
-      shared_preload_libraries: "vector"
 
   bootstrap:
     initdb:
