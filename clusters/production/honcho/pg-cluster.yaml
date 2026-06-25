@@ -6,7 +6,7 @@ metadata:
 spec:
   instances: 1
 
-  imageName: pgvector/pgvector:pg15-trixie
+  imageName: ghcr.io/cloudnative-pg/postgresql:15.12-7
 
   postgresql:
     parameters:
