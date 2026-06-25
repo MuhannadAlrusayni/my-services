@@ -13,12 +13,10 @@ spec:
       labels:
         app: honcho-api
     spec:
-      imagePullSecrets:
-        - name: harbor-pull-secret
       terminationGracePeriodSeconds: 30
       containers:
         - name: api
-          image: harbor.malrusayni.com/private/honcho-api:latest
+          image: ghcr.io/plastic-labs/honcho:v3.0.11
           ports:
             - containerPort: 8000
           envFrom:
