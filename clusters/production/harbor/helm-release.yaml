@@ -13,13 +13,9 @@ spec:
         name: harbor
   values:
     expose:
-      type: ingress
+      type: clusterIP
       tls:
         enabled: false
-      ingress:
-        hosts:
-          core: harbor.malrusayni.com
-        controller: none
     externalURL: https://harbor.malrusayni.com
     database:
       type: external
