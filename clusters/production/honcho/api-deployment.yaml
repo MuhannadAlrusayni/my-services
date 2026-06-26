@@ -19,26 +19,7 @@ spec:
       initContainers:
         - name: migrate
           image: ghcr.io/plastic-labs/honcho:v3.0.11
-          command:
-            - /bin/sh
-            - -c
-            - |
-              echo "Waiting for PostgreSQL..."
-              python3 -c "
-              import psycopg, time, os
-              uri = os.environ['DB_CONNECTION_URI']
-              for i in range(60):
-                  try:
-                      conn = psycopg.connect(uri)
-                      conn.close()
-                      print('PostgreSQL ready')
-                      break
-                  except Exception as e:
-                      print(f'Waiting... ({i+1}/60): {e}')
-                      time.sleep(2)
-              "
-              echo "Running migrations..."
-              /app/.venv/bin/python scripts/provision_db.py
+          command: ["/app/.venv/bin/python", "scripts/provision_db.py"]
           envFrom:
             - configMapRef:
                 name: honcho-api-config
