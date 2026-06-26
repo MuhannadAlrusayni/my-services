@@ -10,4 +10,4 @@ data:
   SUMMARY_MODEL_CONFIG__TRANSPORT: "openai"
   SUMMARY_MODEL_CONFIG__MODEL: "deepseek-v4-flash"
   SUMMARY_MODEL_CONFIG__OVERRIDES__BASE_URL: "https://opencode.ai/zen/go/v1"
-  AUTH_USE_AUTH: "false"
+  AUTH_USE_AUTH: "true"

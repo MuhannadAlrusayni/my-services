@@ -25,6 +25,8 @@ spec:
                 name: honcho-api-config
             - secretRef:
                 name: honcho-api-secret
+            - secretRef:
+                name: honcho-jwt-secret
       containers:
         - name: api
           image: ghcr.io/plastic-labs/honcho:v3.0.11
@@ -35,6 +37,8 @@ spec:
                 name: honcho-api-config
             - secretRef:
                 name: honcho-api-secret
+            - secretRef:
+                name: honcho-jwt-secret
           resources:
             requests:
               memory: "256Mi"

@@ -8,6 +8,7 @@ resources:
   - ollama-deployment.yaml
   - configmap.yaml
   - secret-sealed.yaml
+  - jwt-secret-sealed.yaml
   - ghcr-secret-sealed.yaml
   - api-deployment.yaml
   - ingress.yaml
